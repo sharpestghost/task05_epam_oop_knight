@@ -1,6 +1,7 @@
 package com.epam.knight;
 
 import com.epam.knight.model.Knight;
+import com.epam.knight.model.KnightAmmunitionManager;
 import com.epam.knight.model.ammunition.Ammunition;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -22,28 +23,30 @@ public class KnightTestCase {
 
     @Test
     public void testCalculateAmmunitionCost() {
-        Knight knight = new Knight();
+        Knight knight = new Knight(); 
+        KnightAmmunitionManager manager = new KnightAmmunitionManager(knight);
 
         when(sword.getCost()).thenReturn(10);
         when(helmet.getCost()).thenReturn(20);
 
-        knight.equip(sword);
-        knight.equip(helmet);
+        manager.equipAmmunitionToKnight(sword);
+        manager.equipAmmunitionToKnight(helmet);
 
-        assertThat("Wrong result of method calculateAmmunitionCost (sword cost is 10, helmet cost is 20)", 30, is(knight.calculateAmmunitionCost()));
+        assertThat("Wrong result of method calculateAmmunitionCost (sword cost is 10, helmet cost is 20)", 30, is(manager.calculateAmmunitionCost()));
     }
 
     @Test
     public void testCalculateAmmunitionWeight() {
         Knight knight = new Knight();
+        KnightAmmunitionManager manager = new KnightAmmunitionManager(knight);
 
         when(sword.getWeight()).thenReturn(15);
         when(helmet.getWeight()).thenReturn(5);
 
-        knight.equip(sword);
-        knight.equip(helmet);
+        manager.equipAmmunitionToKnight(sword);
+        manager.equipAmmunitionToKnight(helmet);
 
-        assertThat("Wrong result of method testCalculateAmmunitionWeight (sword weight is 15, helmet weight is 5)", 20, is(knight.calculateAmmunitionWeight()));
+        assertThat("Wrong result of method CalculateAmmunitionWeight (sword weight is 15, helmet weight is 5)", 20, is(manager.calculateAmmunitionWeight()));
     }
 
 }

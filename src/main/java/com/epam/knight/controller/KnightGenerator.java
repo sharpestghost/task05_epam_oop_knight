@@ -2,6 +2,9 @@ package com.epam.knight.controller;
 
 import com.epam.knight.model.Knight;
 
+/**
+ * Generates knight with some ammunition.
+ */
 public class KnightGenerator {
 
     /**
