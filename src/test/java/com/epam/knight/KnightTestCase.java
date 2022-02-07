@@ -3,6 +3,7 @@ package com.epam.knight;
 import com.epam.knight.model.Knight;
 import com.epam.knight.model.KnightAmmunitionManager;
 import com.epam.knight.model.ammunition.Ammunition;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -23,7 +24,7 @@ public class KnightTestCase {
 
     @Test
     public void testCalculateAmmunitionCost() {
-        Knight knight = new Knight(); 
+        Knight knight = new Knight();
         KnightAmmunitionManager manager = new KnightAmmunitionManager(knight);
 
         when(sword.getCost()).thenReturn(10);

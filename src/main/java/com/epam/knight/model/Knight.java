@@ -15,6 +15,7 @@ public class Knight {
 
     /**
      * Add new ammunition element to knight
+     *
      * @param element that should be equipped to the knight
      */
     public void equip(Ammunition element) {

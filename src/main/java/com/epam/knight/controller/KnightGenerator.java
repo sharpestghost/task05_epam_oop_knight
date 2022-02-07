@@ -9,6 +9,7 @@ public class KnightGenerator {
 
     /**
      * Use it to quickly generate knight
+     *
      * @return knight
      */
     public static Knight generateKnight() {
