@@ -22,3 +22,4 @@ public class Knight {
         throw new UnsupportedOperationException("You need to implement this method");
     }
 }
+
