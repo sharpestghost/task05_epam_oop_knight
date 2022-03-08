@@ -1,6 +1,10 @@
 package com.epam.knight.controller;
 
 import com.epam.knight.model.Knight;
+import com.epam.knight.view.FileConnector;
+
+import java.io.IOException;
+
 
 /**
  * Generates knight with some ammunition.
@@ -12,8 +16,15 @@ public class KnightGenerator {
      *
      * @return knight
      */
-    public static Knight generateKnight() {
-        throw new UnsupportedOperationException("You need to implement this method");
+    public static Knight generateKnight() throws IOException {
+        try {
+            FileConnector fc = new FileConnector();
+            return fc.readFile();
+        } catch (IOException e) {
+            return null;
+        }
     }
+
+
 
 }

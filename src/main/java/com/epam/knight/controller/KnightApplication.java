@@ -11,7 +11,7 @@ public class KnightApplication {
     }
 
     private void start() {
-        throw new UnsupportedOperationException("You need to implement this method");
+        KnightController controller = new KnightController();
+        controller.callMainMenu();
     }
-
 }

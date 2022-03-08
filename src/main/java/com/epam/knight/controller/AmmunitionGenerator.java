@@ -1,14 +1,29 @@
 package com.epam.knight.controller;
 
 import com.epam.knight.model.ammunition.Ammunition;
+import com.epam.knight.model.ammunition.AmmunitionGeneral;
 import com.epam.knight.model.ammunition.AmmunitionType;
+import com.epam.knight.model.ammunition.Helmet;
+import com.epam.knight.model.ammunition.Sword;
 
 /**
  * Generates pieces of {@link Ammunition}.
  */
 public class AmmunitionGenerator {
 
-    public Ammunition generateAmmunition(AmmunitionType type, int[] stats) {
-        throw new UnsupportedOperationException("You need to implement this method");
+    public static AmmunitionGeneral generateAmmunition(AmmunitionType type, int[] stats) {
+        AmmunitionGeneral ammunition;
+        switch (type) {
+            case HELMET:
+                ammunition = new Helmet();
+                break;
+            case SWORD:
+                ammunition = new Sword();
+                break;
+            default:
+                throw new UnsupportedOperationException("Unexpected result");
+        }
+        ammunition.setStats(stats);
+        return ammunition;
     }
 }
