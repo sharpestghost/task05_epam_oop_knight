@@ -5,7 +5,7 @@ import com.epam.knight.model.ammunition.Ammunition;
 import com.epam.knight.model.ammunition.AmmunitionType;
 import com.epam.knight.model.ammunition.Sword;
 import com.epam.knight.model.ammunition.Helmet;
-import com.sun.media.jfxmedia.logging.Logger;
+import java.util.logging.Logger;
 
 import java.util.Scanner;
 
@@ -116,7 +116,7 @@ public final class ConsoleView {
 
     public static void fileNotFoundMessage() {
         System.out.println(FILE_NOT_FOUND);
-        Logger.logMsg(Logger.INFO, FILE_NOT_FOUND);
+        Logger.getLogger(FILE_NOT_FOUND);
     }
 
 
