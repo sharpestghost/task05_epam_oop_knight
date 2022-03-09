@@ -12,8 +12,10 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.IOException;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.logging.Logger;
 
 public class FileConnector {
 
@@ -30,6 +32,7 @@ public class FileConnector {
             }
         } catch (IOException e) {
             ConsoleView.fileNotFoundMessage();
+            throw new RuntimeException(e);
         }
         return knight;
     }

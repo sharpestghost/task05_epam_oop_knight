@@ -1,8 +1,6 @@
 package com.epam.knight.model;
 
-import com.epam.knight.controller.AmmunitionGenerator;
 import com.epam.knight.model.ammunition.Ammunition;
-import com.epam.knight.model.ammunition.AmmunitionType;
 
 /**
  * Stores equipped ammunition and calculated stats.

@@ -5,11 +5,9 @@ import com.epam.knight.model.ammunition.Ammunition;
 import com.epam.knight.model.ammunition.AmmunitionType;
 import com.epam.knight.model.ammunition.Sword;
 import com.epam.knight.model.ammunition.Helmet;
-import java.util.logging.Logger;
 
+import java.util.Locale;
 import java.util.Scanner;
-
-
 
 /**
  * Implements all application input and output.
@@ -90,7 +88,7 @@ public final class ConsoleView {
     }
 
     private static int printAmmunitionStat(AmmunitionType ammunitionType, String statName) {
-        System.out.printf(INPUT_WITH_TWO_PARAMETERS, ammunitionType.toString().toLowerCase(), statName);
+        System.out.printf(INPUT_WITH_TWO_PARAMETERS, ammunitionType.toString().toLowerCase(Locale.UK), statName);
         return scanner.nextInt();
     }
 
@@ -116,7 +114,6 @@ public final class ConsoleView {
 
     public static void fileNotFoundMessage() {
         System.out.println(FILE_NOT_FOUND);
-        Logger.getLogger(FILE_NOT_FOUND);
     }
 
 
