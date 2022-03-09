@@ -39,7 +39,12 @@ public class AmmunitionGeneral implements Ammunition, Comparable<Ammunition> {
 
     @Override
     public boolean equals(Object other) {
-        return this.getWeight() == ((Ammunition)other).getWeight();
+        return other != null && this.getWeight() == ((Ammunition) other).getWeight();
+    }
+
+    @Override
+    public int hashCode() {
+        return 523 * this.getWeight() - 862 % this.getWeight();
     }
 
 }
