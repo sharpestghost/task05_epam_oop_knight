@@ -4,11 +4,13 @@ import java.util.Comparator;
 
 public class AmmunitionGeneral implements Ammunition, Comparable {
 
-    protected int weight;
-    protected int cost;
-    protected AmmunitionType ammunition;
-    protected final int WEIGHT_INDEX = 0;
-    protected final int COST_INDEX = 1;
+    public final static int WEIGHT_INDEX = 0;
+    public final static int COST_INDEX = 1;
+    public final static int STATS_COUNT = 3;
+    private int weight;
+    private int cost;
+    private AmmunitionType ammunition;
+
 
     public AmmunitionGeneral(AmmunitionType ammunition) {
         this.ammunition = ammunition;

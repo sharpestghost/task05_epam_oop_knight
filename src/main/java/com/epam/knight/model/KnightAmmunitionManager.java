@@ -10,12 +10,15 @@ import com.epam.knight.model.ammunition.Sword;
  * Manipulates with knight's ammunition and updates knight stats.
  */
 public class KnightAmmunitionManager {
-    public Knight knight;
+    private Knight knight;
 
     public KnightAmmunitionManager(Knight knight) {
         this.knight = knight;
     }
 
+    public Knight getKnight() {
+        return knight;
+    }
     /**
      * Equips item to knight and update knight's stats
      */

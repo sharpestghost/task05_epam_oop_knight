@@ -1,8 +1,8 @@
 package com.epam.knight.model.ammunition;
 
-public class Sword extends AmmunitionGeneral{
-    private int damage;
+public class Sword extends AmmunitionGeneral {
     public static final int DAMAGE_INDEX = 2;
+    private int damage;
 
     public Sword() {
         super(AmmunitionType.SWORD);

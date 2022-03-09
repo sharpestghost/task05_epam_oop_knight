@@ -1,7 +1,10 @@
 package com.epam.knight.view;
 
 import com.epam.knight.model.KnightAmmunitionManager;
-import com.epam.knight.model.ammunition.*;
+import com.epam.knight.model.ammunition.Ammunition;
+import com.epam.knight.model.ammunition.AmmunitionType;
+import com.epam.knight.model.ammunition.Sword;
+import com.epam.knight.model.ammunition.Helmet;
 
 import java.util.Scanner;
 
@@ -10,8 +13,6 @@ import java.util.Scanner;
  */
 public class ConsoleView {
 
-
-//через енамы сделать
     private static Scanner scanner = new Scanner(System.in);
 
     public static void printStartMessage() {
@@ -74,14 +75,13 @@ public class ConsoleView {
     }
 
 
-    public static void printSortMessage() {
-       System.out.println("Choose sort type:" +
-               "\n1. Cost\n2. Weight");
+    public static int printSortMessage() {
+        System.out.println("Choose sort type:\n1. Cost\n2. Weight");
+        return scanner.nextInt();
     }
 
     public static int printSearchMessage() {
-        System.out.println("Choose search field:" +
-                "\n1. Cost\n2. Weight");
+        System.out.println("Choose search field:\n1. Cost\n2. Weight");
         return scanner.nextInt();
     }
 
@@ -94,16 +94,9 @@ public class ConsoleView {
         System.out.println("bye");
     }
 
-
-
-
-
-
-
-
-
-
-
+    public static void fileNotFoundMessage() {
+        System.out.println("File is not found");
+    }
 
 
 }

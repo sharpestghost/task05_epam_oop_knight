@@ -16,9 +16,8 @@ public class Knight {
         this.ammunition = new Ammunition[AMMUNITION_LENGTH];
     }
 
-
     public Ammunition[] getAmmunition() {
-        return ammunition;
+        return ammunition.clone();
     }
 
     public void clearAmmunition() {
@@ -35,8 +34,9 @@ public class Knight {
                 }
             }
             return selectedAmmunition;
+        } else {
+            return null;
         }
-        return null;
     }
 
     public int getCurrentSize() {

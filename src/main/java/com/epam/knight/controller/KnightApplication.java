@@ -1,5 +1,7 @@
 package com.epam.knight.controller;
 
+import com.epam.knight.view.FileConnector;
+
 /**
  * Launches main menu with {@link KnightController}.
  */

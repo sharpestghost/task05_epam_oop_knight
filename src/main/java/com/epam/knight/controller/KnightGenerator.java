@@ -16,15 +16,9 @@ public class KnightGenerator {
      *
      * @return knight
      */
-    public static Knight generateKnight() throws IOException {
-        try {
-            FileConnector fc = new FileConnector();
-            return fc.readFile();
-        } catch (IOException e) {
-            return null;
-        }
+    public static Knight generateKnight() {
+        FileConnector fc = new FileConnector();
+        return fc.readFromFile();
     }
-
-
 
 }

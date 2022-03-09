@@ -4,27 +4,17 @@ import com.epam.knight.model.KnightAmmunitionManager;
 import com.epam.knight.model.ammunition.Ammunition;
 import com.epam.knight.model.ammunition.AmmunitionType;
 import com.epam.knight.view.ConsoleView;
+import com.epam.knight.view.FileConnector;
 
-import java.io.*;
-import java.nio.charset.Charset;
 import java.util.Arrays;
 
 /**
  * Handles main menu and all operations with knight.
  */
 public class KnightController {
-
-    private final int WEIGHT_PICK = 2;
-    private final int COST_PICK  = 1;
-    private KnightAmmunitionManager knightManager;
-
-    {
-        try {
-            knightManager = new KnightAmmunitionManager(KnightGenerator.generateKnight());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    private static final int WEIGHT_PICK = 2;
+    private static final int COST_PICK  = 1;
+    private KnightAmmunitionManager knightManager = new KnightAmmunitionManager(KnightGenerator.generateKnight());
 
 
     public enum ActionType {
@@ -44,8 +34,6 @@ public class KnightController {
         public int getPath() {
             return path;
         }
-
-
 
     }
 
@@ -86,9 +74,9 @@ public class KnightController {
     }
 
     public void makeShowActions() {
-        for (Ammunition a: knightManager.knight.selectCurrentAmmunition()) {
-            if (a != null) {
-                ConsoleView.printShowMessage(a);
+        for (Ammunition ammunition: knightManager.getKnight().getAmmunition()) {
+            if (ammunition != null) {
+                ConsoleView.printShowMessage(ammunition);
             }
         }
     }
@@ -96,18 +84,18 @@ public class KnightController {
     public void makeEquipActions() {
         ConsoleView.printEquipMessage();
         int action = ConsoleView.printChooseOption();
-        for (AmmunitionType a : AmmunitionType.values()) {
-            if (a.getTypeId() == action) {
-                int[] stats = ConsoleView.printAmmunitionData(a);
-                knightManager.equipAmmunitionToKnight(AmmunitionGenerator.generateAmmunition(a, stats));
+        for (AmmunitionType type : AmmunitionType.values()) {
+            if (type.getTypeId() == action) {
+                int[] stats = ConsoleView.printAmmunitionData(type);
+                knightManager.equipAmmunitionToKnight(AmmunitionGenerator.generateAmmunition(type, stats));
             }
         }
     }
 
     public void makeSortActions() {
-        switch (ConsoleView.printSearchMessage()) {
+        switch (ConsoleView.printSortMessage()) {
             case WEIGHT_PICK:
-                Ammunition[] ammunition = knightManager.knight.selectCurrentAmmunition();
+                Ammunition[] ammunition = knightManager.getKnight().selectCurrentAmmunition();
                 Arrays.sort(ammunition);
                 knightManager.reequipAmmunitionToKnight(ammunition);
                 break;
@@ -137,9 +125,9 @@ public class KnightController {
     private void searchByWeight() {
         int minValue = ConsoleView.findSearchLimit("minimum weight");
         int maxValue = ConsoleView.findSearchLimit("maximum weight");
-        for (Ammunition a: knightManager.searchAmmunitionByWeight(minValue, maxValue)) {
-            if (a != null) {
-                ConsoleView.printShowMessage(a);
+        for (Ammunition ammunition: knightManager.searchAmmunitionByWeight(minValue, maxValue)) {
+            if (ammunition != null) {
+                ConsoleView.printShowMessage(ammunition);
             }
         }
     }
@@ -147,15 +135,16 @@ public class KnightController {
     private void searchByCost() {
         int minValue = ConsoleView.findSearchLimit("minimum cost");
         int maxValue = ConsoleView.findSearchLimit("maximum cost");
-        for (Ammunition a: knightManager.searchAmmunitionByCost(minValue, maxValue)) {
-            if (a != null) {
-                ConsoleView.printShowMessage(a);
+        for (Ammunition ammunition: knightManager.searchAmmunitionByCost(minValue, maxValue)) {
+            if (ammunition != null) {
+                ConsoleView.printShowMessage(ammunition);
             }
         }
     }
 
     public void makeExitActions() {
         ConsoleView.printExitMessage();
-        //save kam to file
+        FileConnector fileConnector = new FileConnector();
+        fileConnector.saveData(knightManager.getKnight());
     }
 }

@@ -1,52 +1,85 @@
 package com.epam.knight.view;
 
+import com.epam.knight.controller.AmmunitionGenerator;
 import com.epam.knight.model.Knight;
+import com.epam.knight.model.ammunition.Ammunition;
+import com.epam.knight.model.ammunition.AmmunitionGeneral;
 import com.epam.knight.model.ammunition.AmmunitionType;
+import com.epam.knight.model.ammunition.Sword;
 
+import java.io.FileWriter;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class FileConnector {
 
+    private static final String AMMUN_REGEX = "(Sword|Helmet)[{](damage|protection)=\\d+, weight=\\d+, cost=\\d+[}]";
+    private static final String FILE_PATH = "src/main/java/com/epam/knight/view/data.txt";
+    private static final Pattern integerPattern = Pattern.compile("\\d+");
     private static Knight knight = new Knight();
-    private static final String NEWLINE = "\n";
-    private static final String AMMUNITION_REGEX = "(Sword|Helmet){(damage|protection)=\\d+, weight=\\d+, cost=\\d+}";
 
-    public Knight readFile() throws IOException {
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("data.txt");
-        String data = readFromInputStream(inputStream);
-        transformTextToAmmunitionArray(data);
-        return null;
-    }
-
-    private String readFromInputStream(InputStream inputStream) throws IOException {
-        StringBuilder resultStringBuilder = new StringBuilder();
-        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                resultStringBuilder.append(line).append("\n");
+    public Knight readFromFile()  {
+        try {
+            for (String itemData : loadData()) {
+                addElementFromFile(itemData);
             }
+            return knight;
+        } catch (IOException e) {
+            ConsoleView.fileNotFoundMessage();
+            return null;
         }
-        return resultStringBuilder.toString();
     }
 
-    private static void transformTextToAmmunitionArray(String data) {
-        String[] fileData = data.split("\n");
-        for (String element: fileData) {
-            if (element.matches(AMMUNITION_REGEX)) {
-                addElementFromFile(element);
+    public String[] loadData() throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
+            String[] ammunitionData = new String[Knight.AMMUNITION_LENGTH];
+            String line = br.readLine();
+            for (int i = 0;i < ammunitionData.length && line != null; i++) {
+                ammunitionData[i] = line;
+                line = br.readLine();
             }
+            return ammunitionData;
         }
     }
 
     private static void addElementFromFile(String element) {
-        AmmunitionType type = (element.startsWith("Sword")) ? AmmunitionType.SWORD : AmmunitionType.HELMET;
-        String[] statArray = element.split("\\D");
-        int[] array = new int[3];
+        if (element != null && element.matches(AMMUN_REGEX)) {
+            int[] stats = new int[AmmunitionGeneral.STATS_COUNT];
+            Matcher matcher = integerPattern.matcher(element);
+            int start = 1;
+            int i = 0;
+            while (matcher.find(start)) {
+                String value = element.substring(matcher.start(), matcher.end());
+                stats[i] = Integer.parseInt(value);
+                start = matcher.end();
+                i++;
+            }
+            AmmunitionType type;
+            if (element.startsWith("Sword")) {
+                type = AmmunitionType.SWORD;
+            } else {
+                type = AmmunitionType.HELMET;
+            }
+            knight.equip(AmmunitionGenerator.generateAmmunition(type, new int[]{stats[AmmunitionGeneral.COST_INDEX],
+                    stats[Sword.DAMAGE_INDEX], stats[AmmunitionGeneral.WEIGHT_INDEX]}));
+        }
+    }
 
+    public void saveData(Knight knight) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, false));
+            for (Ammunition a: knight.selectCurrentAmmunition()) {
+                writer.append(a.toString());
+                writer.append(System.lineSeparator());
+            }
+            writer.close();
+        } catch (IOException e) {
+            ConsoleView.fileNotFoundMessage();
+        }
     }
 
 }
