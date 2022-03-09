@@ -14,6 +14,10 @@ import java.util.Arrays;
 public class KnightController {
     private static final int WEIGHT_PICK = 2;
     private static final int COST_PICK  = 1;
+    private static final String MAXIMUM_WEIGHT = "maximum weight";
+    private static final String MINIMUM_WEIGHT = "minimum weight";
+    private static final String MAXIMUM_COST = "maximum cost";
+    private static final String MINIMUM_COST = "minimum cost";
     private KnightAmmunitionManager knightManager = new KnightAmmunitionManager(KnightGenerator.generateKnight());
 
 
@@ -123,8 +127,8 @@ public class KnightController {
     }
 
     private void searchByWeight() {
-        int minValue = ConsoleView.findSearchLimit("minimum weight");
-        int maxValue = ConsoleView.findSearchLimit("maximum weight");
+        int minValue = ConsoleView.findSearchLimit(MINIMUM_WEIGHT);
+        int maxValue = ConsoleView.findSearchLimit(MAXIMUM_WEIGHT);
         for (Ammunition ammunition: knightManager.searchAmmunitionByWeight(minValue, maxValue)) {
             if (ammunition != null) {
                 ConsoleView.printShowMessage(ammunition);
@@ -133,8 +137,8 @@ public class KnightController {
     }
 
     private void searchByCost() {
-        int minValue = ConsoleView.findSearchLimit("minimum cost");
-        int maxValue = ConsoleView.findSearchLimit("maximum cost");
+        int minValue = ConsoleView.findSearchLimit(MINIMUM_COST);
+        int maxValue = ConsoleView.findSearchLimit(MAXIMUM_COST);
         for (Ammunition ammunition: knightManager.searchAmmunitionByCost(minValue, maxValue)) {
             if (ammunition != null) {
                 ConsoleView.printShowMessage(ammunition);

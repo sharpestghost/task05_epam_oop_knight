@@ -1,19 +1,16 @@
 package com.epam.knight.model.ammunition;
 
-import java.util.Comparator;
+public class AmmunitionGeneral implements Ammunition, Comparable<Ammunition> {
 
-public class AmmunitionGeneral implements Ammunition, Comparable {
-
-    public final static int WEIGHT_INDEX = 0;
-    public final static int COST_INDEX = 1;
-    public final static int STATS_COUNT = 3;
+    public static final int WEIGHT_INDEX = 0;
+    public static final int COST_INDEX = 1;
+    public static final int STATS_COUNT = 3;
+    private final AmmunitionType ammunitionType;
     private int weight;
     private int cost;
-    private AmmunitionType ammunition;
-
 
     public AmmunitionGeneral(AmmunitionType ammunition) {
-        this.ammunition = ammunition;
+        this.ammunitionType = ammunition;
     }
 
     public void setStats(int[] stats) {
@@ -21,24 +18,23 @@ public class AmmunitionGeneral implements Ammunition, Comparable {
         this.cost = stats[COST_INDEX];
     }
 
-
     public AmmunitionType getAmmunition() {
-        return ammunition;
+        return ammunitionType;
     }
 
     @Override
-    final public int getWeight() {
+    public final int getWeight() {
         return weight;
     }
 
     @Override
-    final public int getCost() {
+    public final int getCost() {
         return cost;
     }
 
     @Override
-    public int compareTo(Object a) {
-        Ammunition ammunition = (Ammunition) a;
-        return this.getWeight() - ammunition.getWeight();
+    public int compareTo(Ammunition other) {
+        return this.getWeight() - other.getWeight();
     }
+
 }

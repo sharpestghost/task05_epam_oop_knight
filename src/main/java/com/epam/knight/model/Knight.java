@@ -1,9 +1,8 @@
 package com.epam.knight.model;
 
+import com.epam.knight.controller.AmmunitionGenerator;
 import com.epam.knight.model.ammunition.Ammunition;
-import com.epam.knight.model.ammunition.AmmunitionGeneral;
-
-import java.util.Arrays;
+import com.epam.knight.model.ammunition.AmmunitionType;
 
 /**
  * Stores equipped ammunition and calculated stats.
@@ -25,9 +24,10 @@ public class Knight {
     }
 
     public Ammunition[] selectCurrentAmmunition() {
-        if (getCurrentSize() != 0) {
+        if (getCurrentSize() > 0) {
             Ammunition[] selectedAmmunition = new Ammunition[getCurrentSize()];
-            for (int i = 0,j = 0;i < ammunition.length;i++) {
+            int j = 0;
+            for (int i = 0;i < ammunition.length;i++) {
                 if (ammunition[i] != null) {
                     selectedAmmunition[j] = ammunition[i];
                     j++;
@@ -35,7 +35,7 @@ public class Knight {
             }
             return selectedAmmunition;
         } else {
-            return null;
+            return new Ammunition[0];
         }
     }
 

@@ -19,7 +19,8 @@ public class FileConnector {
 
     private static final String AMMUN_REGEX = "(Sword|Helmet)[{](damage|protection)=\\d+, weight=\\d+, cost=\\d+[}]";
     private static final String FILE_PATH = "src/main/java/com/epam/knight/view/data.txt";
-    private static final Pattern integerPattern = Pattern.compile("\\d+");
+    private static final Pattern INTEGER_PATTERN = Pattern.compile("\\d+");
+    private static final Pattern AMMUN_REGEX_PATTERN = Pattern.compile(AMMUN_REGEX);
     private static Knight knight = new Knight();
 
     public Knight readFromFile()  {
@@ -27,11 +28,10 @@ public class FileConnector {
             for (String itemData : loadData()) {
                 addElementFromFile(itemData);
             }
-            return knight;
         } catch (IOException e) {
             ConsoleView.fileNotFoundMessage();
-            return null;
         }
+        return knight;
     }
 
     public String[] loadData() throws IOException {
@@ -47,9 +47,9 @@ public class FileConnector {
     }
 
     private static void addElementFromFile(String element) {
-        if (element != null && element.matches(AMMUN_REGEX)) {
+        if (element != null && AMMUN_REGEX_PATTERN.matcher(element).matches()) {
             int[] stats = new int[AmmunitionGeneral.STATS_COUNT];
-            Matcher matcher = integerPattern.matcher(element);
+            Matcher matcher = INTEGER_PATTERN.matcher(element);
             int start = 1;
             int i = 0;
             while (matcher.find(start)) {
@@ -70,13 +70,12 @@ public class FileConnector {
     }
 
     public void saveData(Knight knight) {
-        try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(FILE_PATH, false));
+        try (FileWriter fr = new FileWriter(FILE_PATH, false);
+            BufferedWriter writer = new BufferedWriter(fr)) {
             for (Ammunition a: knight.selectCurrentAmmunition()) {
                 writer.append(a.toString());
                 writer.append(System.lineSeparator());
             }
-            writer.close();
         } catch (IOException e) {
             ConsoleView.fileNotFoundMessage();
         }

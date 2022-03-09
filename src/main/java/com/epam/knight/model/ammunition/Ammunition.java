@@ -6,5 +6,7 @@ public interface Ammunition {
 
     int getCost();
 
+    void setStats(int[] stats);
+
 
 }

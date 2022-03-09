@@ -1,8 +1,6 @@
 package com.epam.knight.model;
 
-import com.epam.knight.controller.KnightGenerator;
 import com.epam.knight.model.ammunition.Ammunition;
-import com.epam.knight.model.ammunition.AmmunitionGeneral;
 import com.epam.knight.model.ammunition.Helmet;
 import com.epam.knight.model.ammunition.Sword;
 

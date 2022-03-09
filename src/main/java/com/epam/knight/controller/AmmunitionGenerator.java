@@ -9,10 +9,14 @@ import com.epam.knight.model.ammunition.Sword;
 /**
  * Generates pieces of {@link Ammunition}.
  */
-public class AmmunitionGenerator {
+public final class AmmunitionGenerator {
 
-    public static AmmunitionGeneral generateAmmunition(AmmunitionType type, int[] stats) {
-        AmmunitionGeneral ammunition;
+    private AmmunitionGenerator() {
+
+    }
+
+    public static Ammunition generateAmmunition(AmmunitionType type, int[] stats) {
+        Ammunition ammunition;
         switch (type) {
             case HELMET:
                 ammunition = new Helmet();
@@ -26,4 +30,5 @@ public class AmmunitionGenerator {
         ammunition.setStats(stats);
         return ammunition;
     }
+
 }

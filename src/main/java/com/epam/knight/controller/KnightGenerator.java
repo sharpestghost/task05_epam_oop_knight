@@ -3,13 +3,14 @@ package com.epam.knight.controller;
 import com.epam.knight.model.Knight;
 import com.epam.knight.view.FileConnector;
 
-import java.io.IOException;
-
-
 /**
  * Generates knight with some ammunition.
  */
-public class KnightGenerator {
+public final class KnightGenerator {
+
+    private KnightGenerator() {
+
+    }
 
     /**
      * Use it to quickly generate knight

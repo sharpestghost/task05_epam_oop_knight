@@ -8,6 +8,7 @@ public class Sword extends AmmunitionGeneral {
         super(AmmunitionType.SWORD);
     }
 
+    @Override
     public void setStats(int[] stats) {
         super.setStats(stats);
         this.damage = stats[DAMAGE_INDEX];
