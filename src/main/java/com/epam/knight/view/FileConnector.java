@@ -5,6 +5,7 @@ import com.epam.knight.model.Knight;
 import com.epam.knight.model.ammunition.Ammunition;
 import com.epam.knight.model.ammunition.AmmunitionGeneral;
 import com.epam.knight.model.ammunition.AmmunitionType;
+import com.epam.knight.model.ammunition.Helmet;
 import com.epam.knight.model.ammunition.Sword;
 
 import java.io.FileWriter;
@@ -59,14 +60,16 @@ public class FileConnector {
                 start = matcher.end();
                 i++;
             }
-            AmmunitionType type;
             if (element.startsWith("Sword")) {
-                type = AmmunitionType.SWORD;
+                knight.equip(AmmunitionGenerator.generateAmmunition(AmmunitionType.HELMET,
+                        new int[]{stats[AmmunitionGeneral.COST_INDEX], stats[Sword.DAMAGE_INDEX],
+                                stats[AmmunitionGeneral.WEIGHT_INDEX]}));
             } else {
-                type = AmmunitionType.HELMET;
+                knight.equip(AmmunitionGenerator.generateAmmunition(AmmunitionType.HELMET,
+                        new int[]{stats[AmmunitionGeneral.COST_INDEX], stats[Helmet.PROTECTION_INDEX],
+                                stats[AmmunitionGeneral.WEIGHT_INDEX]}));
             }
-            knight.equip(AmmunitionGenerator.generateAmmunition(type, new int[]{stats[AmmunitionGeneral.COST_INDEX],
-                    stats[Sword.DAMAGE_INDEX], stats[AmmunitionGeneral.WEIGHT_INDEX]}));
+
         }
     }
 

@@ -22,19 +22,15 @@ public class Knight {
     }
 
     public Ammunition[] selectCurrentAmmunition() {
-        if (getCurrentSize() > 0) {
-            Ammunition[] selectedAmmunition = new Ammunition[getCurrentSize()];
-            int j = 0;
-            for (int i = 0;i < ammunition.length;i++) {
-                if (ammunition[i] != null) {
-                    selectedAmmunition[j] = ammunition[i];
-                    j++;
-                }
+        Ammunition[] selectedAmmunition = new Ammunition[getCurrentSize()];
+        int j = 0;
+        for (Ammunition value : ammunition) {
+            if (value != null) {
+                selectedAmmunition[j] = value;
+                j++;
             }
-            return selectedAmmunition;
-        } else {
-            return new Ammunition[0];
         }
+        return selectedAmmunition;
     }
 
     public int getCurrentSize() {

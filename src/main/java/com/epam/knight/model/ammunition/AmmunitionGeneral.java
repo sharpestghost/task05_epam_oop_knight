@@ -2,9 +2,6 @@ package com.epam.knight.model.ammunition;
 
 public class AmmunitionGeneral implements Ammunition, Comparable<Ammunition> {
 
-    public static final int WEIGHT_INDEX = 0;
-    public static final int COST_INDEX = 1;
-    public static final int STATS_COUNT = 3;
     private final AmmunitionType ammunitionType;
     private int weight;
     private int cost;
