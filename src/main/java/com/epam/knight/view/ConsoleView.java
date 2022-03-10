@@ -13,9 +13,6 @@ import java.util.Scanner;
  * Implements all application input and output.
  */
 public final class ConsoleView {
-
-
-
     private static final String MENU_MESSAGE = "Main menu:\n" +
             "1. Print knight stats\n" +
             "2. Show ammunition\n" +
@@ -58,8 +55,8 @@ public final class ConsoleView {
                 knight.calculateAmmunitionDamage(),knight.calculateAmmunitionProtection());
     }
 
-    public static void printShowMessage(Ammunition a) {
-        System.out.println(a.toString());
+    public static void printShowAmmunitionItem(Ammunition item) {
+        System.out.println(item.toString());
     }
 
     public static void printEquipMessage() {
@@ -72,14 +69,10 @@ public final class ConsoleView {
         int[] stats = new int[] {weight, cost, 0};
         switch (ammunitionType) {
             case SWORD:
-                Sword sword = new Sword();
                 stats[Sword.DAMAGE_INDEX] = printAmmunitionStat(ammunitionType, DAMAGE);
-                sword.setStats(stats);
                 break;
             case HELMET:
-                Helmet helmet = new Helmet();
                 stats[Helmet.PROTECTION_INDEX] = printAmmunitionStat(ammunitionType, ARMOR);
-                helmet.setStats(stats);
                 break;
             default:
                 break;

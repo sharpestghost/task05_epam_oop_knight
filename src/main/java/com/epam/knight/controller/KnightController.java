@@ -80,7 +80,7 @@ public class KnightController {
     public void makeShowActions() {
         for (Ammunition ammunition: knightManager.getKnight().getAmmunition()) {
             if (ammunition != null) {
-                ConsoleView.printShowMessage(ammunition);
+                ConsoleView.printShowAmmunitionItem(ammunition);
             }
         }
     }
@@ -131,7 +131,7 @@ public class KnightController {
         int maxValue = ConsoleView.findSearchLimit(MAXIMUM_WEIGHT);
         for (Ammunition ammunition: knightManager.searchAmmunitionByWeight(minValue, maxValue)) {
             if (ammunition != null) {
-                ConsoleView.printShowMessage(ammunition);
+                ConsoleView.printShowAmmunitionItem(ammunition);
             }
         }
     }
@@ -141,7 +141,7 @@ public class KnightController {
         int maxValue = ConsoleView.findSearchLimit(MAXIMUM_COST);
         for (Ammunition ammunition: knightManager.searchAmmunitionByCost(minValue, maxValue)) {
             if (ammunition != null) {
-                ConsoleView.printShowMessage(ammunition);
+                ConsoleView.printShowAmmunitionItem(ammunition);
             }
         }
     }

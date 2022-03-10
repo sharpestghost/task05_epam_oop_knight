@@ -7,10 +7,12 @@ import com.epam.knight.model.ammunition.Ammunition;
  */
 public class Knight {
     public static final int AMMUNITION_LENGTH = 10;
+    private int size;
     private Ammunition[] ammunition;
 
     public Knight() {
         this.ammunition = new Ammunition[AMMUNITION_LENGTH];
+        size = 0;
     }
 
     public Ammunition[] getAmmunition() {
@@ -19,6 +21,7 @@ public class Knight {
 
     public void clearAmmunition() {
         ammunition = new Ammunition[AMMUNITION_LENGTH];
+        size = 0;
     }
 
     public Ammunition[] selectCurrentAmmunition() {
@@ -34,12 +37,6 @@ public class Knight {
     }
 
     public int getCurrentSize() {
-        int size = 0;
-        for (Ammunition a: getAmmunition()) {
-            if (a != null) {
-                size++;
-            }
-        }
         return size;
     }
 
@@ -52,6 +49,7 @@ public class Knight {
         for (int i = 0;i < ammunition.length;i++) {
             if (ammunition[i] == null) {
                 ammunition[i] = element;
+                size++;
                 break;
             }
         }
