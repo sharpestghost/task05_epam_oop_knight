@@ -27,7 +27,7 @@ public class KnightAmmunitionManager {
     }
 
     public void reequipAmmunitionToKnight(Ammunition[] ammunition) {
-        knight.clearAmmunition();
+        knight = new Knight();
         for (Ammunition item: ammunition) {
             equipAmmunitionToKnight(item);
         }

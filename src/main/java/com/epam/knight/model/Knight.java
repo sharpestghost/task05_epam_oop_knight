@@ -19,11 +19,6 @@ public class Knight {
         return ammunition.clone();
     }
 
-    public void clearAmmunition() {
-        ammunition = new Ammunition[AMMUNITION_LENGTH];
-        size = 0;
-    }
-
     public Ammunition[] selectCurrentAmmunition() {
         Ammunition[] selectedAmmunition = new Ammunition[getCurrentSize()];
         int j = 0;
