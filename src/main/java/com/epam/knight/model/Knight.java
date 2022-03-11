@@ -6,12 +6,12 @@ import com.epam.knight.model.ammunition.Ammunition;
  * Stores equipped ammunition and calculated stats.
  */
 public class Knight {
-    public static final int AMMUNITION_LENGTH = 10;
+    public static final int MAX_AMMUNITION_AMOUNT = 30;
     private int size;
     private Ammunition[] ammunition;
 
     public Knight() {
-        this.ammunition = new Ammunition[AMMUNITION_LENGTH];
+        this.ammunition = new Ammunition[MAX_AMMUNITION_AMOUNT];
         size = 0;
     }
 
@@ -41,12 +41,8 @@ public class Knight {
      * @param element that should be equipped to the knight
      */
     public void equip(Ammunition element) {
-        for (int i = 0;i < ammunition.length;i++) {
-            if (ammunition[i] == null) {
-                ammunition[i] = element;
-                size++;
-                break;
-            }
+        if (size < MAX_AMMUNITION_AMOUNT) {
+            ammunition[size] = element;
         }
     }
 }
