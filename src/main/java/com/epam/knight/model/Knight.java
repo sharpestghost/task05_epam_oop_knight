@@ -43,6 +43,7 @@ public class Knight {
     public void equip(Ammunition element) {
         if (size < MAX_AMMUNITION_AMOUNT) {
             ammunition[size] = element;
+            size++;
         }
     }
 }
