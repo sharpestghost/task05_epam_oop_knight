@@ -27,8 +27,8 @@ public final class ConsoleView {
     private static final String EQUIP_MENU = "What kind of ammunition do you want to equip?\n1. Sword\n2. Helmet";
     private static final String SORT_MENU = "Choose sort type:\n1. Cost\n2. Weight";
     private static final String SEARCH_MENU = "Choose search field:\n1. Cost\n2. Weight";
-    private static final String INPUT_MINIMUM = "Input minimum %s :%n";
-    private static final String INPUT_MAXIMUM = "Input maximum %s :%n";
+    private static final String INPUT_MINIMUM = "Input minimum %s:%n";
+    private static final String INPUT_MAXIMUM = "Input maximum %s:%n";
     private static final String INPUT_WITH_TWO_PARAMETERS  = "Input %s %s:%n";
     private static final String EXIT_MESSAGE = "Bye!";
     private static final String FILE_NOT_FOUND = "File is not found";

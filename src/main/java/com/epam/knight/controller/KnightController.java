@@ -130,7 +130,9 @@ public class KnightController {
 
     private void printSelectedAmmunition(Ammunition[] selectedAmmunition) {
         for (Ammunition item: selectedAmmunition) {
-            ConsoleView.printShowAmmunitionItem(item);
+            if (item != null) {
+                ConsoleView.printShowAmmunitionItem(item);
+            }
         }
     }
 
