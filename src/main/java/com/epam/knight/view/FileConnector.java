@@ -38,7 +38,7 @@ public class FileConnector {
 
     public String[] loadData() throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
-            String[] ammunitionData = new String[Knight.AMMUNITION_LENGTH];
+            String[] ammunitionData = new String[Knight.MAX_AMMUNITION_AMOUNT];
             String line = br.readLine();
             for (int i = 0;i < ammunitionData.length && line != null; i++) {
                 ammunitionData[i] = line;
