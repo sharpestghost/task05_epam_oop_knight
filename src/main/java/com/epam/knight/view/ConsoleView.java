@@ -1,5 +1,6 @@
 package com.epam.knight.view;
 
+import com.epam.knight.controller.KnightController;
 import com.epam.knight.model.KnightAmmunitionManager;
 import com.epam.knight.model.ammunition.Ammunition;
 import com.epam.knight.model.ammunition.AmmunitionType;
@@ -26,7 +27,8 @@ public final class ConsoleView {
     private static final String EQUIP_MENU = "What kind of ammunition do you want to equip?\n1. Sword\n2. Helmet";
     private static final String SORT_MENU = "Choose sort type:\n1. Cost\n2. Weight";
     private static final String SEARCH_MENU = "Choose search field:\n1. Cost\n2. Weight";
-    private static final String INPUT_WITH_ONE_PARAMETER = "Input %s :%n";
+    private static final String INPUT_MINIMUM = "Input minimum %s :%n";
+    private static final String INPUT_MAXIMUM = "Input maximum %s :%n";
     private static final String INPUT_WITH_TWO_PARAMETERS  = "Input %s %s:%n";
     private static final String EXIT_MESSAGE = "Bye!";
     private static final String FILE_NOT_FOUND = "File is not found";
@@ -100,10 +102,25 @@ public final class ConsoleView {
         return scanner.nextInt();
     }
 
-    public static int findSearchLimit(String message) {
-        System.out.printf(INPUT_WITH_ONE_PARAMETER, message);
+    public static int findSearchMinimum(int selectedItem) {
+        System.out.printf(INPUT_MINIMUM, getStatName(selectedItem));
         return scanner.nextInt();
     }
+    public static int findSearchMaximum(int selectedItem) {
+        System.out.printf(INPUT_MAXIMUM, getStatName(selectedItem));
+        return scanner.nextInt();
+    }
+
+    private static String getStatName(int selectedItem) {
+        String statName;
+        if (selectedItem == KnightController.COST_PICK) {
+            statName = COST;
+        } else {
+            statName = WEIGHT;
+        }
+        return statName;
+    }
+
 
     public static void printExitMessage() {
         System.out.println(EXIT_MESSAGE);

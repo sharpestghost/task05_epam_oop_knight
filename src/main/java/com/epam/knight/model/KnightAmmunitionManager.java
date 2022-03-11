@@ -4,6 +4,8 @@ import com.epam.knight.model.ammunition.Ammunition;
 import com.epam.knight.model.ammunition.Helmet;
 import com.epam.knight.model.ammunition.Sword;
 
+import java.util.Arrays;
+
 /**
  * Manipulates with knight's ammunition and updates knight stats.
  */
@@ -88,7 +90,7 @@ public class KnightAmmunitionManager {
         return selectedAmmunition.clone();
     }
 
-    public void compareByCost() {
+    public void sortByCost() {
         Ammunition[] ammunition = knight.selectCurrentAmmunition();
         for (int i = ammunition.length - 1; i >= 0; i--) {
             for (int j = i; j < ammunition.length - 1; j++) {
@@ -99,6 +101,12 @@ public class KnightAmmunitionManager {
                 }
             }
         }
+        reequipAmmunitionToKnight(ammunition);
+    }
+
+    public void sortByWeight() {
+        Ammunition[] ammunition = getKnight().selectCurrentAmmunition();
+        Arrays.sort(ammunition);
         reequipAmmunitionToKnight(ammunition);
     }
 
