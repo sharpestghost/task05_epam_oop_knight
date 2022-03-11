@@ -31,47 +31,50 @@ public class KnightController {
 
         private final int path;
 
-        ActionType(int path) {
+        ActionType(final int path) {
             this.path = path;
         }
 
-        public int getPath() {
+        public final int getPath() {
             return path;
         }
 
     }
 
     public void callMainMenu()  {
+        ActionType actionType = ActionType.EXIT;
         ConsoleView.printStartMessage();
-        int action = ConsoleView.printChooseOption();
-        for (ActionType actionType : ActionType.values()) {
-            if (actionType.getPath() == action) {
-                switch (actionType) {
-                    case PRINT:
-                        makePrintActions();
-                        break;
-                    case SHOW:
-                        makeShowActions();
-                        break;
-                    case EQUIP:
-                        makeEquipActions();
-                        break;
-                    case SORT:
-                        makeSortActions();
-                        break;
-                    case SEARCH:
-                        makeSearchActions();
-                        break;
-                    case EXIT:
-                        makeExitActions();
-                        return;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + actionType);
-                }
+        int action = ConsoleView.selectChooseOption();
+        for (ActionType type : ActionType.values()) {
+            if (type.getPath() == action) {
+                actionType = type;
+                break;
             }
         }
-        callMainMenu();
+        switch (actionType) {
+            case PRINT:
+                makePrintActions();
+                break;
+            case SHOW:
+                makeShowActions();
+                break;
+            case EQUIP:
+                makeEquipActions();
+                break;
+            case SORT:
+                makeSortActions();
+                break;
+            case SEARCH:
+                makeSearchActions();
+                break;
+            case EXIT:
+                makeExitActions();
+                return;
+            default:
+                throw new IllegalStateException("Unexpected value: " + actionType);
+        }
     }
+
 
     public void makePrintActions() {
         ConsoleView.printKnightStats(knightManager);
@@ -87,13 +90,15 @@ public class KnightController {
 
     public void makeEquipActions() {
         ConsoleView.printEquipMessage();
-        int action = ConsoleView.printChooseOption();
-        for (AmmunitionType type : AmmunitionType.values()) {
-            if (type.getTypeId() == action) {
-                int[] stats = ConsoleView.printAmmunitionData(type);
-                knightManager.equipAmmunitionToKnight(AmmunitionGenerator.generateAmmunition(type, stats));
-            }
+        int action = ConsoleView.selectChooseOption();
+        AmmunitionType type;
+        if (AmmunitionType.SWORD.getTypeId() == action) {
+            type = AmmunitionType.SWORD;
+        } else {
+            type = AmmunitionType.HELMET;
         }
+        int[] stats = ConsoleView.printAmmunitionData(type);
+        knightManager.equipAmmunitionToKnight(AmmunitionGenerator.generateAmmunition(type, stats));
     }
 
     public void makeSortActions() {

@@ -45,9 +45,13 @@ public final class ConsoleView {
         System.out.println(MENU_MESSAGE);
     }
 
-    public static int printChooseOption() {
-        System.out.println(CHOOSE_OPTION);
+    public static int selectChooseOption() {
+        printSelectOptionMessage();
         return scanner.nextInt();
+    }
+
+    private static void printSelectOptionMessage() {
+        System.out.println(CHOOSE_OPTION);
     }
 
     public static void printKnightStats(KnightAmmunitionManager knight) {
