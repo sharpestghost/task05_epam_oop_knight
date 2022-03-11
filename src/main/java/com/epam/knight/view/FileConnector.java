@@ -50,7 +50,7 @@ public class FileConnector {
 
     private static void addElementFromFile(String element) {
         if (element != null && AMMUN_REGEX_PATTERN.matcher(element).matches()) {
-            int[] stats = new int[AmmunitionGeneral.STATS_COUNT];
+            int[] stats = new int[Ammunition.STATS_COUNT];
             Matcher matcher = INTEGER_PATTERN.matcher(element);
             int start = 1;
             int i = 0;
@@ -62,12 +62,12 @@ public class FileConnector {
             }
             if (element.startsWith("Sword")) {
                 knight.equip(AmmunitionGenerator.generateAmmunition(AmmunitionType.HELMET,
-                        new int[]{stats[AmmunitionGeneral.COST_INDEX], stats[Sword.DAMAGE_INDEX],
-                                stats[AmmunitionGeneral.WEIGHT_INDEX]}));
+                        new int[]{stats[Ammunition.COST_INDEX], stats[Sword.DAMAGE_INDEX],
+                                stats[Ammunition.WEIGHT_INDEX]}));
             } else {
                 knight.equip(AmmunitionGenerator.generateAmmunition(AmmunitionType.HELMET,
-                        new int[]{stats[AmmunitionGeneral.COST_INDEX], stats[Helmet.PROTECTION_INDEX],
-                                stats[AmmunitionGeneral.WEIGHT_INDEX]}));
+                        new int[]{stats[Ammunition.COST_INDEX], stats[Helmet.PROTECTION_INDEX],
+                                stats[Ammunition.WEIGHT_INDEX]}));
             }
 
         }
