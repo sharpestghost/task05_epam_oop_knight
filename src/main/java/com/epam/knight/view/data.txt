@@ -1,7 +1,8 @@
 Helmet{protection=4, weight=2, cost=3}
-Sword{damage=32, weight=4, cost=77}
+Helmet{protection=32, weight=4, cost=77}
 Helmet{protection=15, weight=4, cost=6}
 Helmet{protection=7, weight=5, cost=6}
 Helmet{protection=25, weight=44, cost=32}
 Helmet{protection=16, weight=46, cost=52}
+Sword{damage=64, weight=46, cost=25}
 Helmet{protection=80, weight=46, cost=11}

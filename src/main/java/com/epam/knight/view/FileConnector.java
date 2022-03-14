@@ -61,7 +61,7 @@ public class FileConnector {
                 i++;
             }
             if (element.startsWith("Sword")) {
-                knight.equip(AmmunitionGenerator.generateAmmunition(AmmunitionType.HELMET,
+                knight.equip(AmmunitionGenerator.generateAmmunition(AmmunitionType.SWORD,
                         new int[]{stats[AmmunitionGeneral.COST_INDEX], stats[Sword.DAMAGE_INDEX],
                                 stats[AmmunitionGeneral.WEIGHT_INDEX]}));
             } else {
