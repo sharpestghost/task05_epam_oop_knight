@@ -31,6 +31,7 @@ public final class ConsoleView {
     private static final String INPUT_MAXIMUM = "Input maximum %s:%n";
     private static final String INPUT_WITH_TWO_PARAMETERS  = "Input %s %s:%n";
     private static final String EXIT_MESSAGE = "Bye!";
+    private static final String ERROR_MESSAGE = "No results found.";
     private static final String FILE_NOT_FOUND = "File is not found";
     private static final String WEIGHT = "weight";
     private static final String COST = "cost";
@@ -124,6 +125,10 @@ public final class ConsoleView {
 
     public static void printExitMessage() {
         System.out.println(EXIT_MESSAGE);
+    }
+
+    public static void printErrorMessage() {
+        System.out.println(ERROR_MESSAGE);
     }
 
     public static void fileNotFoundMessage() {

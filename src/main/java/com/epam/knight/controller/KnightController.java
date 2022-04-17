@@ -6,6 +6,8 @@ import com.epam.knight.model.ammunition.AmmunitionType;
 import com.epam.knight.view.ConsoleView;
 import com.epam.knight.view.FileConnector;
 
+
+
 /**
  * Handles main menu and all operations with knight.
  */
@@ -21,7 +23,8 @@ public class KnightController {
         EQUIP(3),
         SORT(4),
         SEARCH(5),
-        EXIT(6);
+        EXIT(6),
+        ERROR(-1);
 
         private final int path;
 
@@ -35,9 +38,10 @@ public class KnightController {
 
     }
 
-    public void callMainMenu()  {
-        ActionType actionType = ActionType.EXIT;
-        while (true) {
+    public void callMainMenu() {
+        ActionType actionType;
+        do {
+            actionType = ActionType.ERROR;
             ConsoleView.printStartMessage();
             int action = ConsoleView.selectChooseOption();
             for (ActionType type : ActionType.values()) {
@@ -46,35 +50,37 @@ public class KnightController {
                     break;
                 }
             }
-            switch (actionType) {
-                case PRINT:
-                    makePrintActions();
-                    break;
-                case SHOW:
-                    makeShowActions();
-                    break;
-                case EQUIP:
-                    makeEquipActions();
-                    break;
-                case SORT:
-                    makeSortActions();
-                    break;
-                case SEARCH:
-                    makeSearchActions();
-                    break;
-                case EXIT:
-                    makeExitActions();
-                    return;
-                default:
-                    throw new IllegalStateException("Unexpected value: " + actionType);
-            }
+            performAction(actionType);
+        } while (actionType != ActionType.EXIT);
+    }
+
+    public void performAction(ActionType actionType) {
+        switch (actionType) {
+            case PRINT:
+                ConsoleView.printKnightStats(knightManager);
+                break;
+            case SHOW:
+                makeShowActions();
+                break;
+            case EQUIP:
+                makeEquipActions();
+                break;
+            case SORT:
+                makeSortActions();
+                break;
+            case SEARCH:
+                makeSearchActions();
+                break;
+            case EXIT:
+                makeExitActions();
+                return;
+            case ERROR:
+            default:
+                ConsoleView.printErrorMessage();
+                break;
         }
     }
 
-
-    public void makePrintActions() {
-        ConsoleView.printKnightStats(knightManager);
-    }
 
     public void makeShowActions() {
         for (Ammunition ammunition: knightManager.getKnight().getAmmunition()) {
