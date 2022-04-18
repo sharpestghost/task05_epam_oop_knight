@@ -76,11 +76,10 @@ public class KnightController {
                 return;
             case ERROR:
             default:
-                ConsoleView.printErrorMessage();
+                makeErrorActions();
                 break;
         }
     }
-
 
     public void makeShowActions() {
         for (Ammunition ammunition: knightManager.getKnight().getAmmunition()) {
@@ -93,18 +92,22 @@ public class KnightController {
     public void makeEquipActions() {
         ConsoleView.printEquipMessage();
         int action = ConsoleView.selectChooseOption();
-        AmmunitionType type;
-        if (AmmunitionType.SWORD.getTypeId() == action) {
-            type = AmmunitionType.SWORD;
-        } else {
-            type = AmmunitionType.HELMET;
+        AmmunitionType currentType = null;
+        for (AmmunitionType ammunitionType : AmmunitionType.values()) {
+            if (ammunitionType.getTypeId() == action) {
+                currentType = ammunitionType;
+            }
         }
-        int[] stats = ConsoleView.printAmmunitionData(type);
-        knightManager.equipAmmunitionToKnight(AmmunitionGenerator.generateAmmunition(type, stats));
+        if (currentType != null) {
+            int[] stats = ConsoleView.getAmmunitionData(currentType);
+            knightManager.equipAmmunitionToKnight(AmmunitionGenerator.generateAmmunition(currentType, stats));
+        } else {
+            ConsoleView.printErrorMessage();
+        }
     }
 
     public void makeSortActions() {
-        switch (ConsoleView.printSortMessage()) {
+        switch (ConsoleView.findSortOption()) {
             case WEIGHT_PICK:
                 knightManager.sortByWeight();
                 break;
@@ -112,14 +115,15 @@ public class KnightController {
                 knightManager.sortByCost();
                 break;
             default:
-                break;
+                ConsoleView.printErrorMessage();
+                return;
         }
         makeShowActions();
     }
 
 
     public void makeSearchActions() {
-        int stat = ConsoleView.printSearchMessage();
+        int stat = ConsoleView.findSearchOption();
         if (stat == COST_PICK || stat == WEIGHT_PICK) {
             int minValue = ConsoleView.findSearchMinimum(stat);
             int maxValue = ConsoleView.findSearchMaximum(stat);
@@ -130,6 +134,8 @@ public class KnightController {
                 selectedAmmunition = knightManager.searchAmmunitionByWeight(minValue, maxValue);
             }
             printSelectedAmmunition(selectedAmmunition);
+        } else {
+            ConsoleView.printErrorMessage();
         }
 
     }
@@ -146,5 +152,9 @@ public class KnightController {
         ConsoleView.printExitMessage();
         FileConnector fileConnector = new FileConnector();
         fileConnector.saveData(knightManager.getKnight());
+    }
+
+    public void makeErrorActions() {
+        ConsoleView.printErrorMessage();
     }
 }

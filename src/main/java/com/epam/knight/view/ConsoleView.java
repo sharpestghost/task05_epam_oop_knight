@@ -53,33 +53,21 @@ public final class ConsoleView {
         return scanner.nextInt();
     }
 
-    private static void printSelectOptionMessage() {
-        System.out.println(CHOOSE_OPTION);
-    }
-
     public static void printKnightStats(KnightAmmunitionManager knight) {
         System.out.printf(PRINT_STATS, knight.calculateAmmunitionCost(), knight.calculateAmmunitionWeight(),
                 knight.calculateAmmunitionDamage(),knight.calculateAmmunitionProtection());
     }
 
-    public static void printShowAmmunitionItem(Ammunition item) {
-        System.out.println(item.toString());
-    }
-
-    public static void printEquipMessage() {
-        System.out.println(EQUIP_MENU);
-    }
-
-    public static int[] printAmmunitionData(AmmunitionType ammunitionType) {
-        int weight = printAmmunitionStat(ammunitionType, WEIGHT);
-        int cost = printAmmunitionStat(ammunitionType, COST);
+    public static int[] getAmmunitionData(AmmunitionType ammunitionType) {
+        int weight = getAmmunitionStat(ammunitionType, WEIGHT);
+        int cost = getAmmunitionStat(ammunitionType, COST);
         int[] stats = new int[] {weight, cost, 0};
         switch (ammunitionType) {
             case SWORD:
-                stats[Sword.DAMAGE_INDEX] = printAmmunitionStat(ammunitionType, DAMAGE);
+                stats[Sword.DAMAGE_INDEX] = getAmmunitionStat(ammunitionType, DAMAGE);
                 break;
             case HELMET:
-                stats[Helmet.PROTECTION_INDEX] = printAmmunitionStat(ammunitionType, ARMOR);
+                stats[Helmet.PROTECTION_INDEX] = getAmmunitionStat(ammunitionType, ARMOR);
                 break;
             default:
                 break;
@@ -87,29 +75,33 @@ public final class ConsoleView {
         return stats;
     }
 
-    private static int printAmmunitionStat(AmmunitionType ammunitionType, String statName) {
-        System.out.printf(INPUT_WITH_TWO_PARAMETERS, ammunitionType.toString().toLowerCase(Locale.UK), statName);
+    private static int getAmmunitionStat(AmmunitionType ammunitionType, String statName) {
+        printAmmunitionStat(ammunitionType, statName);
         return scanner.nextInt();
     }
 
 
-    public static int printSortMessage() {
-        System.out.println(SORT_MENU);
+    public static int findSortOption() {
+        printSortMessage();
         return scanner.nextInt();
     }
 
-    public static int printSearchMessage() {
-        System.out.println(SEARCH_MENU);
+    public static int findSearchOption() {
+        printSearchMessage();
         return scanner.nextInt();
     }
 
     public static int findSearchMinimum(int selectedItem) {
-        System.out.printf(INPUT_MINIMUM, getStatName(selectedItem));
+        printSearchItemMessage(INPUT_MINIMUM, selectedItem);
         return scanner.nextInt();
     }
     public static int findSearchMaximum(int selectedItem) {
-        System.out.printf(INPUT_MAXIMUM, getStatName(selectedItem));
+        printSearchItemMessage(INPUT_MAXIMUM, selectedItem);
         return scanner.nextInt();
+    }
+
+    private static void printSearchItemMessage(String itemMessage, int selectedItem) {
+        System.out.printf(itemMessage, getStatName(selectedItem));
     }
 
     private static String getStatName(int selectedItem) {
@@ -122,6 +114,29 @@ public final class ConsoleView {
         return statName;
     }
 
+    private static void printSelectOptionMessage() {
+        System.out.println(CHOOSE_OPTION);
+    }
+
+    public static void printShowAmmunitionItem(Ammunition item) {
+        System.out.println(item.toString());
+    }
+
+    public static void printEquipMessage() {
+        System.out.println(EQUIP_MENU);
+    }
+
+    public static void printAmmunitionStat(AmmunitionType ammunitionType, String statName) {
+        System.out.printf(INPUT_WITH_TWO_PARAMETERS, ammunitionType.toString().toLowerCase(Locale.UK), statName);
+    }
+
+    public static void printSortMessage() {
+        System.out.println(SORT_MENU);
+    }
+
+    public static void printSearchMessage() {
+        System.out.println(SEARCH_MENU);
+    }
 
     public static void printExitMessage() {
         System.out.println(EXIT_MESSAGE);
