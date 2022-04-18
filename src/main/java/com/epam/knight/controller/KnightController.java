@@ -6,15 +6,13 @@ import com.epam.knight.model.ammunition.AmmunitionType;
 import com.epam.knight.view.ConsoleView;
 import com.epam.knight.view.FileConnector;
 
-
-
 /**
  * Handles main menu and all operations with knight.
  */
 public class KnightController {
     public static final int WEIGHT_PICK = 2;
     public static final int COST_PICK  = 1;
-    private KnightAmmunitionManager knightManager = new KnightAmmunitionManager(KnightGenerator.generateKnight());
+    private final KnightAmmunitionManager knightManager = new KnightAmmunitionManager(KnightGenerator.generateKnight());
 
 
     public enum ActionType {
