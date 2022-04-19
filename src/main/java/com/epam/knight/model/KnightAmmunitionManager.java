@@ -80,8 +80,8 @@ public class KnightAmmunitionManager {
     }
 
     public Ammunition[] searchAmmunitionByWeight(int minValue, int maxValue) {
-        Ammunition[] currentAmmunition = knight.getAmmunition();
-        Ammunition[] selectedAmmunition = new Ammunition[knight.getCurrentSize()];
+        Ammunition[] currentAmmunition = getKnight().selectCurrentAmmunition();
+        Ammunition[] selectedAmmunition = new Ammunition[currentAmmunition.length];
         for (int i = 0;i < knight.getCurrentSize();i++) {
             if (currentAmmunition[i].getWeight() >= minValue && currentAmmunition[i].getWeight() <= maxValue) {
                 selectedAmmunition[i] = currentAmmunition[i];
