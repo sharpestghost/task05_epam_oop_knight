@@ -2,16 +2,21 @@ package com.epam.knight.model;
 
 import com.epam.knight.model.ammunition.Ammunition;
 
+import java.util.Arrays;
+
 /**
  * Stores equipped ammunition and calculated stats.
  */
 public class Knight {
-    public static final int MAX_AMMUNITION_AMOUNT = 30;
+    public static final int STANDARD_AMMUNITION_LIMIT = 8;
+    private static final int ARRAY_LIMIT_MULTIPLIER = 2;
     private int size;
+    private int capacity;
     private Ammunition[] ammunition;
 
     public Knight() {
-        this.ammunition = new Ammunition[MAX_AMMUNITION_AMOUNT];
+        capacity = STANDARD_AMMUNITION_LIMIT;
+        this.ammunition = new Ammunition[capacity];
         size = 0;
     }
 
@@ -20,15 +25,7 @@ public class Knight {
     }
 
     public Ammunition[] selectCurrentAmmunition() {
-        Ammunition[] selectedAmmunition = new Ammunition[getCurrentSize()];
-        int j = 0;
-        for (Ammunition value : ammunition) {
-            if (value != null) {
-                selectedAmmunition[j] = value;
-                j++;
-            }
-        }
-        return selectedAmmunition;
+        return Arrays.copyOf(ammunition, size);
     }
 
     public int getCurrentSize() {
@@ -41,9 +38,19 @@ public class Knight {
      * @param element that should be equipped to the knight
      */
     public void equip(Ammunition element) {
-        if (size < MAX_AMMUNITION_AMOUNT) {
-            ammunition[size] = element;
-            size++;
+        if (size == capacity) {
+            increaseAmmunitionLimit();
+        }
+        ammunition[size] = element;
+        size++;
+    }
+
+    private void increaseAmmunitionLimit() {
+        if (ARRAY_LIMIT_MULTIPLIER * capacity > capacity) {
+            capacity *= ARRAY_LIMIT_MULTIPLIER;
+            ammunition = Arrays.copyOf(ammunition, capacity);
+        } else {
+            size--;
         }
     }
 }

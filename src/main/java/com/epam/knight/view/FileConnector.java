@@ -27,24 +27,20 @@ public class FileConnector {
 
     public Knight readFromFile()  {
         try {
-            for (String itemData : loadData()) {
-                addElementFromFile(itemData);
-            }
+            loadData();
         } catch (IOException e) {
             ConsoleView.fileNotFoundMessage();
         }
         return knight;
     }
 
-    public String[] loadData() throws IOException {
+    public void loadData() throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
-            String[] ammunitionData = new String[Knight.MAX_AMMUNITION_AMOUNT];
             String line = br.readLine();
-            for (int i = 0;i < ammunitionData.length && line != null; i++) {
-                ammunitionData[i] = line;
+            while (line != null) {
+                addElementFromFile(line);
                 line = br.readLine();
             }
-            return ammunitionData;
         }
     }
 
