@@ -29,7 +29,7 @@ public class FileConnector {
         try {
             loadData();
         } catch (IOException e) {
-            ConsoleView.fileNotFoundMessage();
+            ConsoleView.fileNotFoundMessage(e);
         }
         return knight;
     }
@@ -77,7 +77,7 @@ public class FileConnector {
                 writer.append(System.lineSeparator());
             }
         } catch (IOException e) {
-            ConsoleView.fileNotFoundMessage();
+            ConsoleView.fileNotFoundMessage(e);
         }
     }
 

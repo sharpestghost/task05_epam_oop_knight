@@ -7,13 +7,18 @@ import com.epam.knight.model.ammunition.AmmunitionType;
 import com.epam.knight.model.ammunition.Sword;
 import com.epam.knight.model.ammunition.Helmet;
 
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Implements all application input and output.
  */
 public final class ConsoleView {
+
+    private static final Logger LOGGER = Logger.getGlobal();
     private static final String MENU_MESSAGE = "Main menu:\n" +
             "1. Print knight stats\n" +
             "2. Show ammunition\n" +
@@ -146,9 +151,8 @@ public final class ConsoleView {
         System.out.println(ERROR_MESSAGE);
     }
 
-    public static void fileNotFoundMessage() {
-        System.out.println(FILE_NOT_FOUND);
+    public static void fileNotFoundMessage(IOException e) {
+        LOGGER.log(Level.SEVERE, FILE_NOT_FOUND, e);
     }
-
 
 }
